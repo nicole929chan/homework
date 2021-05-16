@@ -18,7 +18,7 @@ class CreateItemsTable extends Migration
             $table->string('category_slug')->comment('物品類型代碼');
             $table->string('box_slug')->comment('箱子代碼');
             $table->string('place')->comment('拾獲地點');
-            $string->string('image01')->nullable('物品照片');
+            $table->string('image01')->nullable('物品照片');
             $table->string('contact_name')->nullable()->comment('拾獲聯絡人');
             $table->string('contact_email')->nullable()->comment('拾獲聯絡人郵件');
             $table->string('contact_phone_number')->nullable()->comment('拾獲聯絡人手機');
