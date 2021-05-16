@@ -19,9 +19,11 @@ class CreateItemsTable extends Migration
             $table->string('box_slug')->comment('箱子代碼');
             $table->string('place')->comment('拾獲地點');
             $table->string('image01')->nullable('物品照片');
+            $table->string('description')->nullable()->comment('說明');
             $table->string('contact_name')->nullable()->comment('拾獲聯絡人');
             $table->string('contact_email')->nullable()->comment('拾獲聯絡人郵件');
             $table->string('contact_phone_number')->nullable()->comment('拾獲聯絡人手機');
+            $table->datetime('pickup_at')->nullable()->comment('拾獲時間');
             $table->datetime('finished_at')->nullable()->comment('領取時間');
             $table->timestamps();
         });
