@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Item extends Model
 {
     use HasFactory;
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_slug', 'slug');
+    }
+
+    public function box()
+    {
+        return $this->belongsTo(Box::class, 'box_slug', 'slug');
+    }
 }

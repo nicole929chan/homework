@@ -18,4 +18,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('find-items', [ItemsController::class, 'create']);
+Route::get('lost-and-found', [ItemsController::class, 'index'])->name('item.index');
+Route::get('find-items', [ItemsController::class, 'create'])->name('item.create');
