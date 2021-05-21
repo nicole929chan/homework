@@ -22,8 +22,8 @@ class BoxFactory extends Factory
     public function definition()
     {
         return [
-            'slug' => 'MIS-1F-01',
-            'description' => '資訊管理大樓1F'
+            'slug' => $this->faker->slug(),
+            'title' => $this->faker->sentence()
         ];
     }
 }

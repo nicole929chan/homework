@@ -15,8 +15,8 @@ class CreateItemsTable extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->string('category_slug')->comment('物品類型代碼');
-            $table->string('box_slug')->comment('箱子代碼');
+            $table->foreignId('category_id')->comment('物品類型');
+            $table->foreignId('box_id')->comment('箱子');
             $table->string('place')->comment('拾獲地點');
             $table->string('image01')->nullable('物品照片');
             $table->string('description')->nullable()->comment('說明');

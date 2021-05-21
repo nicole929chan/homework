@@ -16,7 +16,7 @@ class CreateBoxesTable extends Migration
         Schema::create('boxes', function (Blueprint $table) {
             $table->id();
             $table->string('slug')->unique()->comment('箱子代碼');
-            $table->string('description')->comment('放置位置');
+            $table->string('title')->comment('放置位置');
             $table->timestamps();
         });
     }

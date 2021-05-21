@@ -22,8 +22,8 @@ class CategoryFactory extends Factory
     public function definition()
     {
         return [
-            'slug' => '3c',
-            'name' => '3C產品'
+            'slug' => $this->faker->slug(),
+            'name' => $this->faker->word()
         ];
     }
 }
