@@ -6,6 +6,7 @@ use App\Http\Requests\Items\ItemStoreRequest;
 use App\Models\Box;
 use App\Models\Category;
 use App\Models\Item;
+use Illuminate\Http\Request;
 
 class ItemsController extends Controller
 {
@@ -16,13 +17,13 @@ class ItemsController extends Controller
      */
     public function index()
     {
-        $items = Item::orderBy('pickup_at', 'desc')->get();
+        $items = Item::orderBy('pickup_at', 'desc');
 
-        return view('items.index', ['items' => $items]);
+        return view('items.index', ['items' => $items->filter(request()->only('category_id', 'place', 'description'))->get()]);
     }
 
     /**
-     * 發佈貼文
+     * 發佈貼文表單
      *
      * @return void
      */
@@ -37,6 +38,12 @@ class ItemsController extends Controller
         ]);
     }
 
+    /**
+     * 儲存貼文
+     *
+     * @param ItemStoreRequest $request
+     * @return void
+     */
     public function store(ItemStoreRequest $request)
     {
         $item = Item::create([
