@@ -31,8 +31,16 @@
 
         <div class="">
             <label for="place" class="form-label">拾獲地點</label>
-            <input type="text" name="place" id="place" class="form-control" value="{{ old('place') }}">
+            <input type="text" name="place" id="place" class="form-control" value="{{ old('place') }}" placeholder="例: 資管大樓2F">
             @error('place')
+                <div class="alert text-danger" role="alert"><small>{{ $message }}</small></div>
+            @enderror
+        </div>
+
+        <div class="">
+            <label for="description" class="form-label">物品簡述</label>
+            <input type="text" name="description" id="description" class="form-control" value="{{ old('description') }}" placeholder="例: 黑色iPhone">
+            @error('description')
                 <div class="alert text-danger" role="alert"><small>{{ $message }}</small></div>
             @enderror
         </div>

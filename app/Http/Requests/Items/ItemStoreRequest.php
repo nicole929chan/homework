@@ -28,7 +28,8 @@ class ItemStoreRequest extends FormRequest
             'box_id' => 'required|exists:boxes,id',
             'place' => 'required|max:50',
             'pickup_at' => 'sometimes|date_format:Y-m-d\TH:i',
-            'image01' => 'sometimes|image'
+            'image01' => 'sometimes|image',
+            'description' => 'required|max:50'
         ];
     }
 
@@ -42,7 +43,9 @@ class ItemStoreRequest extends FormRequest
             'place.required' => '必填',
             'place.max' => '至多50個字',
             'pickup_at.date_format' => '日期時間格式錯誤',
-            'image01.image' => '須為圖檔'
+            'image01.image' => '須為圖檔',
+            'description.required' => '必填',
+            'description.max' => '至多50個字'
         ];
     }
 }
