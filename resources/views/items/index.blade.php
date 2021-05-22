@@ -1,12 +1,16 @@
 <x-layout>
     <h2>遺失物品清單...</h2>
 
-    <div class="card" style="width: 18rem;">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
+    <div class="d-flex flex-wrap">
+        @foreach ($items as $item)
+           <div class="card" style="width: 18rem;">
+                <img src="{{ asset('storage/'.$item->image01) }}" class="card-img-top" alt="">
+                <div class="card-body">
+                    <p class="card-text">物品類型: {{ $item->category->name }}</p>
+                    <p class="card-text">拾獲地點: {{ $item->place }}</p>
+                    <p class="card-text">拾獲時間: {{ $item->pickup_at }}</p>
+                </div>
+            </div>
+        @endforeach
     </div>
 </x-layout>

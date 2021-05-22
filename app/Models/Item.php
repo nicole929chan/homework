@@ -20,11 +20,11 @@ class Item extends Model
 
     public function category()
     {
-        return $this->belongsTo(Category::class, 'category_slug', 'slug');
+        return $this->belongsTo(Category::class);
     }
 
     public function box()
     {
-        return $this->belongsTo(Box::class, 'box_slug', 'slug');
+        return $this->belongsTo(Box::class);
     }
 }

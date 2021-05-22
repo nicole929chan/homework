@@ -16,7 +16,7 @@ class ItemsController extends Controller
      */
     public function index()
     {
-        $items = Item::all();
+        $items = Item::orderBy('pickup_at', 'desc')->get();
 
         return view('items.index', ['items' => $items]);
     }
@@ -45,7 +45,7 @@ class ItemsController extends Controller
             'place' => $request->place,
             'description' => $request->description,
             'pickup_at' => $request->pickup_at,
-            'image01' => $path = $request->file('image01')->store('items')
+            'image01' => $path = $request->file('image01')->store('items', 'public')
         ]);
 
         return redirect(route('item.create'));
