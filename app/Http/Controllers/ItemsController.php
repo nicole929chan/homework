@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Items\ItemStoreRequest;
 use App\Models\Box;
 use App\Models\Category;
 use App\Models\Item;
-use Illuminate\Http\Request;
 
 class ItemsController extends Controller
 {
@@ -37,7 +37,7 @@ class ItemsController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(ItemStoreRequest $request)
     {
         $item = Item::create([
             'category_id' => $request->category_id,
@@ -49,6 +49,5 @@ class ItemsController extends Controller
         ]);
 
         return redirect(route('item.create'));
-
     }
 }

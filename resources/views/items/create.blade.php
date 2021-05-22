@@ -8,9 +8,12 @@
             <select name="category_id" id="category_id" class="form-control">
                 <option value="">請選擇</option>
                 @foreach ($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    <option value="{{ $category->id }}" @if($category->id == old('category_id')) selected @endif>{{ $category->name }}</option>
                 @endforeach
             </select>
+            @error('category_id')
+                <div class="alert text-danger" role="alert"><small>{{ $message }}</small></div>
+            @enderror
         </div>
 
         <div class="">
@@ -18,24 +21,36 @@
             <select name="box_id" id="box_id" class="form-control">
                 <option value="">請選擇</option>
                 @foreach ($boxes as $box)
-                    <option value="{{ $box->id }}">{{ $box->title }}</option>
+                    <option value="{{ $box->id }}" @if($box->id == old('box_id')) selected @endif>{{ $box->title }}</option>
                 @endforeach
             </select>
+            @error('box_id')
+                <div class="alert text-danger" role="alert"><small>{{ $message }}</small></div>
+            @enderror
         </div>
 
         <div class="">
             <label for="place" class="form-label">拾獲地點</label>
-            <input type="text" name="place" id="place" class="form-control">
+            <input type="text" name="place" id="place" class="form-control" value="{{ old('place') }}">
+            @error('place')
+                <div class="alert text-danger" role="alert"><small>{{ $message }}</small></div>
+            @enderror
         </div>
 
         <div class="">
             <label for="pickup_at" class="form-label">拾獲時間</label>
-            <input type="datetime-local" name="pickup_at" id="pickup_at" class="form-control">
+            <input type="datetime-local" name="pickup_at" id="pickup_at" class="form-control" value="{{ old('pickup_at') }}">
+            @error('pickup_at')
+                <div class="alert text-danger" role="alert"><small>{{ $message }}</small></div>
+            @enderror
         </div>
 
         <div class="">
             <label for="image01">上傳圖檔</label>
             <input type="file" name="image01" class="form-control">
+            @error('image01')
+                <div class="alert text-danger" role="alert"><small>{{ $message }}</small></div>
+            @enderror
         </div>
 
         <button type="button" class="btn btn-secondary">返回</button>
