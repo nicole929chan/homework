@@ -54,15 +54,14 @@
         </div>
 
         <div class="">
-            <label for="image01">上傳圖檔</label>
+            <label for="image01" class="form-label">上傳圖檔</label>
             <input type="file" name="image01" class="form-control">
             @error('image01')
                 <div class="alert text-danger" role="alert"><small>{{ $message }}</small></div>
             @enderror
         </div>
 
-        <button type="button" class="btn btn-secondary">返回</button>
+        <a href="{{ route('home.action') }}" class="btn btn-secondary">返回首頁</a>
         <button type="submit" class="btn btn-primary">送出</button>
     </form>
-
 </x-layout>

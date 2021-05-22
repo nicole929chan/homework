@@ -51,9 +51,14 @@ class ItemsController extends Controller
             'box_id' => $request->box_id,
             'place' => $request->place,
             'description' => $request->description,
-            'pickup_at' => $request->pickup_at,
-            'image01' => $path = $request->file('image01')->store('items', 'public')
+            'pickup_at' => $request->pickup_at
         ]);
+
+        if ($file = $request->file('image01')) {
+            $path = $file->store('items', 'public');
+            $item->image01 = $path;
+            $item->save();
+        }
 
         return redirect(route('item.create'));
     }
