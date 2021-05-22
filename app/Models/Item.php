@@ -19,21 +19,6 @@ class Item extends Model
         'pickup_at'
     ];
 
-    public function scopeFilter(Builder $query, array $filters)
-    {
-        $query->when($filters['category_id'] ?? false, function ($query, $category_id) {
-            $query->where('category_id', $category_id);
-        });
-
-        $query->when($filters['place'] ?? false, function ($query, $place) {
-            $query->orWhere('place', 'like', "%{$place}%");
-        });
-
-        $query->when($filters['description'] ?? false, function ($query, $description) {
-            $query->orWhere('description', 'like', "%{$description}%");
-        });
-    }
-
     public function category()
     {
         return $this->belongsTo(Category::class);

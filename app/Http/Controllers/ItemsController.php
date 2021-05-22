@@ -6,10 +6,24 @@ use App\Http\Requests\Items\ItemStoreRequest;
 use App\Models\Box;
 use App\Models\Category;
 use App\Models\Item;
+use App\Repositories\BoxRepository;
+use App\Repositories\CategoryRepository;
+use App\Repositories\ItemRepository;
 use Illuminate\Http\Request;
 
 class ItemsController extends Controller
 {
+    protected $itemRepo;
+    protected $categoryRepo;
+    protected $boxRepo;
+
+    public function __construct(ItemRepository $itemRepo, CategoryRepository $categoryRepo, BoxRepository $boxRepo)
+    {
+        $this->itemRepo = $itemRepo;
+        $this->categoryRepo = $categoryRepo;
+        $this->boxRepo = $boxRepo;
+    }
+
     /**
      * 遺失物品清單
      *
@@ -17,9 +31,7 @@ class ItemsController extends Controller
      */
     public function index()
     {
-        $items = Item::orderBy('pickup_at', 'desc');
-
-        return view('items.index', ['items' => $items->filter(request()->only('category_id', 'place', 'description'))->get()]);
+        return view('items.index', ['items' => $this->itemRepo->get()]);
     }
 
     /**
@@ -29,12 +41,9 @@ class ItemsController extends Controller
      */
     public function create() 
     {
-        $categories = Category::all();
-        $boxes = Box::all();
-
         return view('items.create', [
-            'categories' => $categories,
-            'boxes' => $boxes
+            'categories' => $this->categoryRepo->get(),
+            'boxes' => $this->boxRepo->get()
         ]);
     }
 
@@ -46,19 +55,7 @@ class ItemsController extends Controller
      */
     public function store(ItemStoreRequest $request)
     {
-        $item = Item::create([
-            'category_id' => $request->category_id,
-            'box_id' => $request->box_id,
-            'place' => $request->place,
-            'description' => $request->description,
-            'pickup_at' => $request->pickup_at
-        ]);
-
-        if ($file = $request->file('image01')) {
-            $path = $file->store('items', 'public');
-            $item->image01 = $path;
-            $item->save();
-        }
+        $this->itemRepo->set();
 
         return redirect(route('item.create'));
     }
