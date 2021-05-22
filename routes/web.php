@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemsController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,9 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'action'])->name('home.action');
 
-Route::get('lost-and-found', [ItemsController::class, 'index'])->name('item.index');
-Route::get('find-items', [ItemsController::class, 'create'])->name('item.create');
+Route::get('items', [ItemsController::class, 'index'])->name('item.index');
+Route::get('items/create', [ItemsController::class, 'create'])->name('item.create');
+Route::post('items', [ItemsController::class, 'store'])->name('item.store');

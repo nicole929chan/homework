@@ -1,22 +1,25 @@
 <x-layout>
     <h2>我撿到...</h2>
 
-    <form action="#" enctype="multipart/form-data">
-
+    <form method="post" action="{{ action([App\Http\Controllers\ItemsController::class, 'store']) }}" enctype="multipart/form-data">
+        @csrf
         <div class="">
-            <label for="category_slug" class="form-label">物品類型</label>
-            <select name="category_slug" id="category_slug" class="form-control">
+            <label for="category_id" class="form-label">物品類型</label>
+            <select name="category_id" id="category_id" class="form-control">
                 <option value="">請選擇</option>
-                <option value="3c">3C產品</option>
-                <option value="clothes">衣物</option>
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
             </select>
         </div>
 
         <div class="">
-            <label for="category_slug" class="form-label">放置位置</label>
-            <select name="box_slug" id="category_slug" class="form-control">
+            <label for="box_id" class="form-label">放置位置</label>
+            <select name="box_id" id="box_id" class="form-control">
                 <option value="">請選擇</option>
-                <option value="mis-1f">資管大樓1F</option>
+                @foreach ($boxes as $box)
+                    <option value="{{ $box->id }}">{{ $box->title }}</option>
+                @endforeach
             </select>
         </div>
 
@@ -27,7 +30,7 @@
 
         <div class="">
             <label for="pickup_at" class="form-label">拾獲時間</label>
-            <input type="date" name="pickup_at" id="pickup_at" class="form-control">
+            <input type="datetime-local" name="pickup_at" id="pickup_at" class="form-control">
         </div>
 
         <div class="">
