@@ -3,14 +3,7 @@
 
     <div class="d-flex flex-wrap">
         @foreach ($items as $item)
-           <div class="card" style="width: 18rem;">
-                <img src="{{ asset('storage/'.$item->image01) }}" class="card-img-top" alt="">
-                <div class="card-body">
-                    <p class="card-text">物品類型: {{ $item->category->name }}</p>
-                    <p class="card-text">拾獲地點: {{ $item->place }}</p>
-                    <p class="card-text">拾獲時間: {{ $item->pickup_at }}</p>
-                </div>
-            </div>
+           <x-item-card :item=$item></x-item-card>
         @endforeach
     </div>
 </x-layout>
