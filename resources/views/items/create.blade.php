@@ -1,5 +1,10 @@
 <x-layout>
-    <h2>我撿到...</h2>
+    <h2 style="text-align:center;
+                position:relative;
+                top: 30px;
+                font: size 40px;">我撿到...</h2>
+    <br>
+    <hr align ="center" width="1300" size="4" color="#006699" noshade="noshade"/>
 
     <form method="post" action="{{ action([App\Http\Controllers\ItemsController::class, 'store']) }}" enctype="multipart/form-data">
         @csrf
@@ -7,6 +12,7 @@
             <label for="category_id" class="form-label">物品類型</label>
             <select name="category_id" id="category_id" class="form-control">
                 <option value="">請選擇</option>
+                
                 @foreach ($categories as $category)
                     <option value="{{ $category->id }}" @if($category->id == old('category_id')) selected @endif>{{ $category->name }}</option>
                 @endforeach
@@ -20,6 +26,7 @@
             <label for="box_id" class="form-label">放置位置</label>
             <select name="box_id" id="box_id" class="form-control">
                 <option value="">請選擇</option>
+                
                 @foreach ($boxes as $box)
                     <option value="{{ $box->id }}" @if($box->id == old('box_id')) selected @endif>{{ $box->title }}</option>
                 @endforeach
@@ -61,6 +68,7 @@
             @enderror
         </div>
 
+        <br>
         <a href="{{ route('home.action') }}" class="btn btn-secondary">返回首頁</a>
         <button type="submit" class="btn btn-primary">送出</button>
     </form>

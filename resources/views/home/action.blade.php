@@ -1,9 +1,15 @@
 <x-layout>
-    <h2>失物招領...</h2>
-
+    <h2 style="text-align:center;
+               position:relative;
+               top: 35px;
+               font-size:50px;">尋獲物品</h2>
+    <br>
+    <br>
+    <form action="#" style="max-width: 100px; margin: auto;">
     <a href="{{ route('item.create') }}" class="btn btn-primary">
         發佈貼文
     </a>
+    </form>
 
     <hr class="mb-5 mt-5">
 
