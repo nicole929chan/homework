@@ -3,8 +3,9 @@
 namespace App\Repositories;
 
 use App\Models\Box;
+use App\Repositories\Contracts\IBoxRepository;
 
-class BoxRepository
+class BoxRepository implements IBoxRepository
 {
     protected $box;
 

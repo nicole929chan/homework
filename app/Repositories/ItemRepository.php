@@ -4,8 +4,9 @@ namespace App\Repositories;
 
 use App\Filters\Filter;
 use App\Models\Item;
+use App\Repositories\Contracts\IItemRepository;
 
-class ItemRepository
+class ItemRepository implements IItemRepository
 {
     protected $item;
 
@@ -19,7 +20,7 @@ class ItemRepository
      *
      * @return void
      */
-    public function getItems()
+    public function get()
     {
         $query = $this->filter();
 
@@ -31,7 +32,7 @@ class ItemRepository
      *
      * @return void
      */
-    public function setItem()
+    public function set()
     {
         $this->item = $this->item->create([
             'category_id' => request('category_id'),
@@ -53,7 +54,7 @@ class ItemRepository
      *
      * @return query builder
      */
-    protected function filter()
+    public function filter()
     {
         $query = $this->item->orderBy('pickup_at', 'desc');
 

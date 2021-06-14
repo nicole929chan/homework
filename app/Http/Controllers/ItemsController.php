@@ -3,13 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Items\ItemStoreRequest;
-use App\Models\Box;
-use App\Models\Category;
-use App\Models\Item;
-use App\Repositories\BoxRepository;
-use App\Repositories\CategoryRepository;
-use App\Repositories\ItemRepository;
-use Illuminate\Http\Request;
+use App\Repositories\Contracts\IBoxRepository;
+use App\Repositories\Contracts\ICategoryRepository;
+use App\Repositories\Contracts\IItemRepository;
 
 class ItemsController extends Controller
 {
@@ -17,7 +13,7 @@ class ItemsController extends Controller
     protected $categoryRepo;
     protected $boxRepo;
 
-    public function __construct(ItemRepository $itemRepo, CategoryRepository $categoryRepo, BoxRepository $boxRepo)
+    public function __construct(IItemRepository $itemRepo, ICategoryRepository $categoryRepo, IBoxRepository $boxRepo)
     {
         $this->itemRepo = $itemRepo;
         $this->categoryRepo = $categoryRepo;
@@ -31,7 +27,7 @@ class ItemsController extends Controller
      */
     public function index()
     {
-        return view('items.index', ['items' => $this->itemRepo->getItems()]);
+        return view('items.index', ['items' => $this->itemRepo->get()]);
     }
 
     /**
@@ -55,7 +51,7 @@ class ItemsController extends Controller
      */
     public function store(ItemStoreRequest $request)
     {
-        $this->itemRepo->setItem();
+        $this->itemRepo->set();
 
         return redirect(route('item.create'));
     }
