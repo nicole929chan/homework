@@ -13,9 +13,11 @@ class ItemRepository
         $this->item = $item;
     }
 
-    public function get()
+    public function getItems()
     {
-        return $this->filter()->get();
+        $query = $this->filter();
+
+        return $query->get();
     }
 
     public function set()
@@ -35,22 +37,29 @@ class ItemRepository
         }
     }
 
+    /**
+     * 搜尋條件
+     *
+     * @return query builder
+     */
     protected function filter()
     {
-        $this->item = $this->item->orderBy('pickup_at', 'desc');
+        $query = $this->item->orderBy('pickup_at', 'desc');
 
-        if ($category_id = request('category_id')) {
-            $this->item->where('category_id', $category_id);
-        }
+        $filters = request()->only(['category_id', 'place', 'description']);
+        $query->where(function ($query) use ($filters) {
+            foreach ($filters as $filtered_by => $filter) {
+                if ($filter) {
+                    if ($filtered_by == 'category_id') {
+                        $query->orWhere($filtered_by, $filter);
+                    } else {
+                        $query->orWhere($filtered_by, 'like', "%{$filter}%");
+                    }
+                }
+            }
+        });
+        // dd($query->toSql());
         
-        if ($place = request('place')) {
-            $this->item->orWhere('place', 'like', "%{$place}%");
-        }
-
-        if ($description = request('description')) {
-            $this->item->orWhere('description', 'like', "%{$description}%");
-        }
-
-        return $this->item;
+        return $query;
     }
 }

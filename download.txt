@@ -1,0 +1,24 @@
+download
+1. xampp - 網頁伺服器, 資料庫, PHP程式語言
+2. composer - PHP套件管理
+3. git - 版本控制
+
+以上安裝都使用預設值, 一直下一步.
+
+如何使用
+
+1. 執行 c:\xampp\xampp-control.exe 
+   Apache 按 Start
+   MySQL 按 Start
+   變成綠色(沒有錯誤訊息)表示OK
+
+2. 進到資料夾 c:\xampp\htdocs 按滑鼠右鍵 選擇 Git bash here
+   開出的視窗輸入  git clone https://github.com/nicole929chan/homework.git
+   開始下載程式, 完畢後點選.env檔案, DB_DATABASE=laravel 改成 DB_DATABASE=homework
+
+3. 下載完畢後進入homework資料夾
+   可以用第二個方式進入後再 Git bash here
+   或者它一下載完(目前資料夾是c:\xampp\htdocs), 輸入指令 cd homework
+
+4. bash已經在homework資料夾, 輸入指令 composer install, 開始安裝必要套件.
+   如果都沒錯誤, 開啟網址 http://localhost/homework/public/ 應該會看到網頁Laravel...

@@ -31,7 +31,7 @@ class ItemsController extends Controller
      */
     public function index()
     {
-        return view('items.index', ['items' => $this->itemRepo->get()]);
+        return view('items.index', ['items' => $this->itemRepo->getItems()]);
     }
 
     /**
