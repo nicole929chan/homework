@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Filters\Filter;
 use App\Models\Item;
 
 class ItemRepository
@@ -13,6 +14,11 @@ class ItemRepository
         $this->item = $item;
     }
 
+    /**
+     * 遺失物品清單
+     *
+     * @return void
+     */
     public function getItems()
     {
         $query = $this->filter();
@@ -20,7 +26,12 @@ class ItemRepository
         return $query->get();
     }
 
-    public function set()
+    /**
+     * 儲存貼文
+     *
+     * @return void
+     */
+    public function setItem()
     {
         $this->item = $this->item->create([
             'category_id' => request('category_id'),
@@ -46,18 +57,8 @@ class ItemRepository
     {
         $query = $this->item->orderBy('pickup_at', 'desc');
 
-        $filters = request()->only(['category_id', 'place', 'description']);
-        $query->where(function ($query) use ($filters) {
-            foreach ($filters as $filtered_by => $filter) {
-                if ($filter) {
-                    if ($filtered_by == 'category_id') {
-                        $query->orWhere($filtered_by, $filter);
-                    } else {
-                        $query->orWhere($filtered_by, 'like', "%{$filter}%");
-                    }
-                }
-            }
-        });
+        $query = (new Filter($query))->apply();
+        
         // dd($query->toSql());
         
         return $query;

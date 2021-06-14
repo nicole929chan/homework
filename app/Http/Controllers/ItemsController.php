@@ -55,7 +55,7 @@ class ItemsController extends Controller
      */
     public function store(ItemStoreRequest $request)
     {
-        $this->itemRepo->set();
+        $this->itemRepo->setItem();
 
         return redirect(route('item.create'));
     }
